@@ -7,8 +7,8 @@ import (
 )
 
 type Configuration struct {
-	Server             serverConfig
-	DatabaseConnection databaseConnection
+	Server serverConfig
+	DBConn databaseConnection
 }
 
 type serverConfig struct {
