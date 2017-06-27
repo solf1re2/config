@@ -7,12 +7,21 @@ import (
 )
 
 type Configuration struct {
-	Server serverConfig
+	Server             serverConfig
+	DatabaseConnection databaseConnection
 }
 
 type serverConfig struct {
-	Port int    `json:"port"`
+	Port string `json:"port"`
 	Name string `json:"name"`
+}
+
+type databaseConnection struct {
+	DBUserName string `json:"DBUsername"`
+	DBPassword string `json:"DBPassword"`
+	DBHostname string `json:"DBHostname"`
+	DBPort     string `json:"DBPort"`
+	DBDatabase string `json:"DBDatabase"`
 }
 
 func LoadConfig(path string) Configuration {
