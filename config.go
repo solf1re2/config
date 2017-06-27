@@ -8,21 +8,26 @@ import (
 
 type Configuration struct {
 	Server serverConfig
-	DBConn databaseConnection
+	// DBConn databaseConnection
 }
 
 type serverConfig struct {
-	Port string `json:"port"`
-	Name string `json:"name"`
+	Port       string `json:"port"`
+	Name       string `json:"name"`
+	DBUserName string `json:"dbUsername"`
+	DBPassword string `json:"dbPassword"`
+	DBHostname string `json:"dbHostname"`
+	DBPort     string `json:"dbPort"`
+	DBDatabase string `json:"dbDatabase"`
 }
 
-type databaseConnection struct {
-	DBUserName string `json:"DBUsername"`
-	DBPassword string `json:"DBPassword"`
-	DBHostname string `json:"DBHostname"`
-	DBPort     string `json:"DBPort"`
-	DBDatabase string `json:"DBDatabase"`
-}
+// type databaseConnection struct {
+// 	DBUserName string `json:"DBUsername"`
+// 	DBPassword string `json:"DBPassword"`
+// 	DBHostname string `json:"DBHostname"`
+// 	DBPort     string `json:"DBPort"`
+// 	DBDatabase string `json:"DBDatabase"`
+// }
 
 func LoadConfig(path string) Configuration {
 	file, err := ioutil.ReadFile(path)
