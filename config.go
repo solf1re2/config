@@ -21,6 +21,16 @@ type serverConfig struct {
 	DBDatabase string `json:"dbDatabase"`
 }
 
+// Server is a generic struct for a server architecture.  hopefully useful for both server and database, with the server type being helpful in defining its use.
+type Server struct {
+	Name     string `json:"name"`
+	Hostname string `json:"hostname"`
+	Port     int    `json:"port"`
+	UserName string `json:"username"`
+	Password string `json:"password"`
+	Database string `json:"database"`
+}
+
 // type databaseConnection struct {
 // 	DBUserName string `json:"DBUsername"`
 // 	DBPassword string `json:"DBPassword"`
@@ -36,6 +46,21 @@ func LoadConfig(path string) Configuration {
 	}
 
 	var config Configuration
+	err = json.Unmarshal(file, &config)
+	if err != nil {
+		log.Fatal("Config Parse Error: ", err)
+	}
+	return config
+}
+
+// LoadServerConfig takes the path to a json cofig file for loading into the program.
+func LoadServerConfig(path string) Server {
+	file, err := ioutil.ReadFile(path)
+	if err != nil {
+		log.Fatal("Config File Missing. ", err)
+	}
+
+	var config Server
 	err = json.Unmarshal(file, &config)
 	if err != nil {
 		log.Fatal("Config Parse Error: ", err)
